@@ -1,134 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <style>
-        .hero.is-primary {
-            background-color: #4a90e2;
-        }
+      .hero.is-primary {
+        background-color: #4a90e2;
+      }
 
-        .button.is-primary.is-rounded {
-            margin-right: 1rem;
-        }
+      .button.is-primary.is-rounded {
+        margin-right: 1rem;
+      }
 
-        @media only screen and (min-width: 992px) {
-            .fullheight {
-                min-height: 100vh;
-            }
+      @media only screen and (min-width: 992px) {
+        .fullheight {
+          min-height: 100vh;
         }
+      }
 
-        .card {
-            height: 100%;
-        }
+      .card {
+        height: 100%;
+      }
     </style>
     <title>AuxiliAI</title>
-</head>
+  </head>
 
-<body>
-    <section class="hero is-primary fullheight">
-        <div class="hero-body mt-6">
-            <div class="container has-text-centered">
-                <h1 class="title">
-                    🤖 AuxiliAI
-                </h1>
-                <h2 class="subtitle">
-                    Seu assistente administrativo virtual
-                </h2>
-                <form action="/processar" method="POST" enctype="multipart/form-data">
-                    <div class="file has-name is-centered">
-                        <label class="file-label">
-                            <input class="file-input" type="file" name="pdfFile" accept=".pdf" required>
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-upload"></i>
-                                </span>
-                                <span class="file-label">
-                                    Escolher arquivo PDF
-                                </span>
-                            </span>
-                            <span class="file-name">
-                                Nenhum arquivo selecionado
-                            </span>
-                        </label>
-                    </div>
-                    <button class="button is-primary is-rounded mt-4" type="submit">
-                        Enviar PDF
-                    </button>
-                </form>
+  <body>
+    <div id="root"></div>
 
-                <div class="columns is-multiline is-centered mt-6">
-                    <div class="column is-one-third">
-                        <div class="card">
-                            <div class="card-content">
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <script src="pages/home.js" type="text/babel"></script>
+    <script src="pages/chat.js" type="text/babel"></script>
 
-                                <h4 class="subtitle has-text-primary">Grátis</h4>
-                                <ul>
-                                    <li>Upload de um PDF</li>
-                                    <li>Limite de 10 perguntas</li>
-                                    <del>
-                                        <li>Suporte técnico</li>
-                                    </del>
-                                    <del>
-                                        <li>Suporte prioritário</li>
-                                    </del>
+    <script type="text/babel">
+      const Link = ReactRouterDOM.Link,
+        Route = ReactRouterDOM.Route;
 
-                                    <del>
-                                        <li>Gerenciamento de usuários</li>
-                                    </del>
-                                </ul>
-                            </div>
-                            <footer class="card-footer">
-                                <a href="#" class="card-footer-item button is-primary">Testar</a>
-                            </footer>
-                        </div>
-                    </div>
-                    <div class="column is-one-third">
-                        <div class="card">
-                            <div class="card-content">
-                                <h4 class="subtitle has-text-primary">Basic R$ 49/mês</h4>
-                                <ul>
-                                    <li>Upload de X megabytes</li>
-                                    <li>Limite de X perguntas</li>
-                                    <li>Suporte técnico</li>
-                                    <del>
-                                        <li>Suporte prioritário</li>
-                                    </del>
-                                    <del>
-                                        <li>Gerenciamento de usuários</li>
-                                    </del>
-                                </ul>
-                            </div>
-                            <footer class="card-footer">
-                                <a href="#" class="card-footer-item button is-primary">Assinar</a>
-                            </footer>
-                        </div>
-                    </div>
-                    <div class="column is-one-third">
-                        <div class="card">
-                            <div class="card-content">
-                                <h4 class="subtitle has-text-primary">Business - Entre em contato</h4>
-                                <ul>
-                                    <li>Upload de X megabytes</li>
-                                    <li>Limite personalizado perguntas</li>
-                                    <li>Suporte técnico</li>
-                                    <li>Suporte prioritário</li>
-                                    <li>Gerenciamento de usuários</li>
-                                </ul>
-                            </div>
-                            <footer class="card-footer">
-                                <a href="#" class="card-footer-item button is-primary">Entre em contato</a>
-                            </footer>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      const App = (props) => (
+        <ReactRouterDOM.HashRouter>
+          <nav class=" kgreen-logo has-text-centered">
+            <a href="/">
+              <h1 class="mb-4 mt-4 title is-centered is-size-3">🤖 AuxiliAI</h1>
+            </a>
+          </nav>
 
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-</body>
+          <Route path="/" exact component={Home} />
+          <Route path="/chat" exact component={Chat} />
+        </ReactRouterDOM.HashRouter>
+      );
 
+      ReactDOM.render(<App />, document.querySelector("#root"));
+    </script>
+  </body>
 </html>
