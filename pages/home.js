@@ -1,39 +1,25 @@
 const Home = (props) => {
   return (
-    <section class="hero is-primary fullheight">
-      <div class="hero-body mt-6">
+    <section class="hero  fullheight">
+      <div class="hero-body">
         <div class="container has-text-centered">
           <h2 class="subtitle">Seu assistente administrativo virtual</h2>
-          <form action="/processar" method="POST" enctype="multipart/form-data">
-            <div class="file has-name is-centered">
-              <label class="file-label">
-                <input
-                  class="file-input"
-                  type="file"
-                  name="pdfFile"
-                  accept=".pdf"
-                  required
-                />
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">Escolher arquivo PDF</span>
-                </span>
-                <span class="file-name">Nenhum arquivo selecionado</span>
-              </label>
-            </div>
-            <button class="button is-primary is-rounded mt-4" type="submit">
-              Enviar PDF
-            </button>
-            <a
-              href="#/chat"
-              class="button is-primary is-rounded mt-4"
-              type="submit"
-            >
-              Chat
-            </a>
-          </form>
+          <a
+            href="#/chat"
+            class="button is-primary is-rounded mt-4 mb-6"
+            type="submit"
+          >
+            Iniciar conversa
+          </a>
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              src="https://www.youtube.com/embed/fJ9rUzIMcZQ?controls=0"
+            ></iframe>
+          </div>
 
           <div class="columns is-multiline is-centered mt-6">
             <div class="column is-one-third">

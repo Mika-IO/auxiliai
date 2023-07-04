@@ -12,8 +12,17 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <style>
-      .hero.is-primary {
-        background-color: #4a90e2;
+      .logo {
+        background-color: #00d1b2;
+      }
+
+      .logo h1 {
+        color: #ffffff;
+      }
+
+      body {
+        margin: 0px;
+        padding: 0px;
       }
 
       .button.is-primary.is-rounded {
@@ -49,9 +58,9 @@
 
       const App = (props) => (
         <ReactRouterDOM.HashRouter>
-          <nav class=" kgreen-logo has-text-centered">
+          <nav class=" logo has-text-centered">
             <a href="/">
-              <h1 class="mb-4 mt-4 title is-centered is-size-3">🤖 AuxiliAI</h1>
+              <h1 class=" is-centered is-size-3">🤖 AuxiliAI</h1>
             </a>
           </nav>
 
