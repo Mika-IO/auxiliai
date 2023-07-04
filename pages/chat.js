@@ -1,139 +1,110 @@
-const Chat = (props) => {
-  const { useState } = React;
-  const [message, setMessage] = useState("");
-  const [conversations, setConversations] = useState({});
-  const [currentConversationId, setCurrentConversationId] = useState(null);
+const { useState } = React;
 
-  const handleSendMessage = () => {
-    if (message.trim() !== "") {
-      const newMessage = {
-        id: Date.now(),
-        content: message,
+const Chat = () => {
+  const [messages, setMessages] = useState([]);
+  const [isFirstMessage, setIsFirstMessage] = useState(true);
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState("");
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const messageInput = event.target.elements["message-input"];
+    const pdfInput = event.target.elements["pdf-input"];
+
+    const message = messageInput.value;
+
+    if (isFirstMessage && pdfInput.files.length > 0) {
+      const pdfFile = pdfInput.files[0];
+
+      const fileElement = (
+        <p key={messages.length}>Arquivo PDF: {pdfFile.name}</p>
+      );
+      setMessages((prevMessages) => [...prevMessages, fileElement]);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const arrayBuffer = reader.result;
+        const blob = new Blob([arrayBuffer], { type: "application/pdf" });
+        const blobUrl = URL.createObjectURL(blob);
+
+        const pdfPreview = (
+          <embed
+            key={messages.length + 1}
+            src={blobUrl}
+            width="100%"
+            height="500px"
+          />
+        );
+        setMessages((prevMessages) => [...prevMessages, pdfPreview]);
       };
+      reader.readAsArrayBuffer(pdfFile);
+    }
 
-      let updatedConversation;
+    const messageElement = <p key={messages.length}>{message}</p>;
+    setMessages((prevMessages) => [...prevMessages, messageElement]);
 
-      if (conversations[currentConversationId]?.length === 0) {
-        // Primeira mensagem da conversa é um PDF enviado pelo usuário
-        updatedConversation = [newMessage];
-      } else {
-        updatedConversation = [
-          ...conversations[currentConversationId],
-          newMessage,
-        ];
-      }
+    messageInput.value = "";
 
-      const updatedConversations = {
-        ...conversations,
-        [currentConversationId]: updatedConversation,
-      };
-
-      setConversations(updatedConversations);
-      setMessage("");
+    if (isFirstMessage) {
+      setIsFirstMessage(false);
     }
   };
-
-  const handleInputChange = (event) => {
-    setMessage(event.target.value);
-  };
-
-  const handleConversationSelection = (conversationId) => {
-    setCurrentConversationId(conversationId);
-  };
-
-  const handleNewConversation = () => {
-    const conversationId = Date.now().toString();
-    setCurrentConversationId(conversationId);
-    setConversations({
-      ...conversations,
-      [conversationId]: [],
-    });
-  };
-
-  const currentConversation = conversations[currentConversationId] || [];
 
   return (
     <section className="section">
       <div className="container">
         <div className="columns">
-          <div className="column is-three-quarters">
-            <div className="box">
-              <div className="content" id="chat-content">
-                {currentConversation.length === 0 ? (
-                  <div>Selecione uma conversa ou inicie uma nova.</div>
-                ) : (
-                  currentConversation.map((message, index) => (
-                    <div key={message.id}>
-                      {index === 0 ? (
-                        <strong>{message.content}</strong>
-                      ) : (
-                        message.content
-                      )}
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-            <div className="field">
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Digite sua mensagem"
-                  id="message-input"
-                  value={message}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <div className="control">
-                <button
-                  className="button is-primary"
-                  id="send-button"
-                  onClick={handleSendMessage}
-                >
-                  Enviar
-                </button>
-              </div>
-            </div>
-          </div>
           <div className="column">
             <aside className="menu">
               <p className="menu-label">Conversas</p>
               <ul className="menu-list">
-                {Object.keys(conversations).map((conversationId) => {
-                  const conversation = conversations[conversationId];
-                  const firstMessage =
-                    conversation.length > 0
-                      ? conversation[0].content
-                      : "Nova Conversa";
-                  const createdAt = new Date(
-                    parseInt(conversationId)
-                  ).toLocaleDateString();
-
-                  return (
-                    <li
-                      key={conversationId}
-                      onClick={() =>
-                        handleConversationSelection(conversationId)
-                      }
-                    >
-                      <a>
-                        {firstMessage} ({createdAt})
-                      </a>
-                    </li>
-                  );
-                })}
+                <li>
+                  <a>Arquivo PDF: Porto Seguros - Vida.pdf</a>
+                </li>
               </ul>
               <button
                 className="button is-primary"
                 id="new-conversation-button"
-                onClick={handleNewConversation}
               >
                 Nova Conversa
               </button>
             </aside>
+          </div>
+          <div className="column is-three-quarters">
+            <div className="content">
+              <div id="message-container">{messages}</div>
+            </div>
+            <form id="chat-form" onSubmit={handleFormSubmit}>
+              <div className="field">
+                <div className="control">
+                  <input
+                    id="message-input"
+                    className="input"
+                    type="text"
+                    style={{ display: isFirstMessage ? "none" : "block" }}
+                    placeholder="Digite sua mensagem"
+                  />
+                </div>
+              </div>
+              <div id="pdf-field" className="field">
+                <div className="control">
+                  <input
+                    id="pdf-input"
+                    className="input"
+                    type="file"
+                    accept=".pdf"
+                    style={{ display: isFirstMessage ? "block" : "none" }}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  <button type="submit" className="button is-primary">
+                    Enviar
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
