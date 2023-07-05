@@ -11,10 +11,8 @@ const Home = (props) => {
           >
             Iniciar conversa
           </a>
-          <div class="video-container">
+          <div>
             <iframe
-              width="560"
-              height="315"
               allow="autoplay; encrypted-media"
               allowfullscreen
               src="https://www.youtube.com/embed/fJ9rUzIMcZQ?controls=0"

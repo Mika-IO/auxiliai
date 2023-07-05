@@ -3,7 +3,7 @@ const { useState } = React;
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [isFirstMessage, setIsFirstMessage] = useState(true);
-  const [pdfPreviewUrl, setPdfPreviewUrl] = useState("");
+  const [isPdfSelected, setIsPdfSelected] = useState(false); // Estado para verificar se um PDF foi selecionado
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -11,7 +11,12 @@ const Chat = () => {
     const messageInput = event.target.elements["message-input"];
     const pdfInput = event.target.elements["pdf-input"];
 
+    // nao enviar mensagens vazias
     const message = messageInput.value;
+
+    if (isFirstMessage && pdfInput.files.length === 0) {
+      return; // Retorna sem fazer nada se nenhum arquivo PDF estiver selecionado
+    }
 
     if (isFirstMessage && pdfInput.files.length > 0) {
       const pdfFile = pdfInput.files[0];
@@ -38,6 +43,8 @@ const Chat = () => {
         setMessages((prevMessages) => [...prevMessages, pdfPreview]);
       };
       reader.readAsArrayBuffer(pdfFile);
+
+      setIsPdfSelected(true); // Define o estado para true quando um PDF é selecionado
     }
 
     const messageElement = <p key={messages.length}>{message}</p>;
@@ -50,30 +57,33 @@ const Chat = () => {
     }
   };
 
+  const handlePdfInputChange = (event) => {
+    const pdfInput = event.target;
+    setIsPdfSelected(pdfInput.files.length > 0);
+  };
+
   return (
     <section className="section">
-      <div className="container">
-        <div className="columns">
-          <div className="column">
-            <aside className="menu">
-              <p className="menu-label">Conversas</p>
-              <ul className="menu-list">
-                <li>
-                  <a>Arquivo PDF: Porto Seguros - Vida.pdf</a>
-                </li>
-              </ul>
-              <button
-                className="button is-primary"
-                id="new-conversation-button"
-              >
-                Nova Conversa
-              </button>
-            </aside>
-          </div>
-          <div className="column is-three-quarters">
-            <div className="content">
-              <div id="message-container">{messages}</div>
-            </div>
+      <div className="columns">
+        <div className="column hero is-fullheight-with-navbar has-background-white-ter">
+          <aside className="menu">
+            <p className="menu-label">Conversas</p>
+            <ul className="menu-list">
+              <li className="mb-4">
+                <a>Arquivo PDF: Porto Seguros - Vida.pdf</a>
+              </li>
+            </ul>
+            <button className="button is-primary" id="new-conversation-button">
+              Nova Conversa
+            </button>
+          </aside>
+        </div>
+        <div className="column hero is-fullheight-with-navbar is-three-quarters ">
+          <div className="content">
+            {messages.map((message, index) => (
+              <div class="notification">{message}</div>
+            ))}
+
             <form id="chat-form" onSubmit={handleFormSubmit}>
               <div className="field">
                 <div className="control">
@@ -93,13 +103,18 @@ const Chat = () => {
                     className="input"
                     type="file"
                     accept=".pdf"
+                    onChange={handlePdfInputChange}
                     style={{ display: isFirstMessage ? "block" : "none" }}
                   />
                 </div>
               </div>
               <div className="field">
                 <div className="control">
-                  <button type="submit" className="button is-primary">
+                  <button
+                    type="submit"
+                    className="button  is-primary"
+                    disabled={!isPdfSelected}
+                  >
                     Enviar
                   </button>
                 </div>
