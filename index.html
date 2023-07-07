@@ -1,75 +1,234 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AuxiliAI - Seu assistente administrativo virtual</title>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
     />
-    <style>
-      .logo {
-        background-color: #00d1b2;
-      }
-
-      .logo h1 {
-        color: #ffffff;
-      }
-
-      body {
-        margin: 0px;
-        padding: 0px;
-      }
-
-      .button.is-primary.is-rounded {
-        margin-right: 1rem;
-      }
-
-      @media only screen and (min-width: 992px) {
-        .fullheight {
-          min-height: 100vh;
-        }
-      }
-
-      .card {
-        height: 100%;
-      }
-    </style>
-    <title>AuxiliAI</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/custom.css" />
   </head>
 
   <body>
-    <div id="root"></div>
+    <!-- NavBar va a todo lo ancho -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item ml-6 mt-4" href="/">
+          <div style="transform: scale(1)">
+            <svg
+              width="160"
+              height="50"
+              viewBox="0 0 350 113.45406608062449"
+              class="css-1j8o68f"
+            >
+              <defs id="SvgjsDefs1416"></defs>
+              <g
+                id="SvgjsG1417"
+                featurekey="nameFeature-0"
+                transform="matrix(2.7450763567708876,0,0,2.7450763567708876,-2.3058619406441383,-30.744857290160994)"
+                fill="#111111"
+              >
+                <path
+                  d="M16.04 30 c-0.16 -2.92 -1.48 -4.64 -4.52 -4.64 c-0.84 0 -1.56 0.12 -2.16 0.36 c-1.84 0.84 -2.52 2.4 -2.52 4.32 c0 0.64 0.08 1.24 0.28 1.76 c0.6 2.08 2.4 2.84 4.4 2.84 c3.04 0 4.52 -1.64 4.52 -4.64 z M23.64 40 l-6 0 c-0.4 -1 -0.76 -2 -1 -3.04 c-1.36 2.24 -3.44 3.24 -6 3.24 c-5.72 0 -9.8 -4.8 -9.8 -10.28 c0 -6.32 4.72 -10.12 10.68 -10.12 c6.36 0 10.36 4.08 10.52 10.2 c0.04 0.52 0.04 1.12 0.04 1.84 c0 2.8 0.44 5.6 1.56 8.16 z M39.32299999999999 20 l6 0 l0 10 c0 6.12 -4.24 10.2 -10.2 10.2 c-6.12 0 -10.2 -4.28 -10.2 -10.2 l0 -10 l6 0 l0 10 c0 2.68 1.36 4.64 4.2 4.64 c2.92 0 4.2 -1.92 4.2 -4.64 l0 -10 z M57.205999999999996 34.24 l-4.2 5.76 l-6.6 0 l7.52 -10.28 l-7.12 -9.72 l6.6 0 l3.8 5.2 l3.8 -5.2 l6.6 0 l-7.08 9.72 l7.48 10.28 l-6.6 0 z M69.289 20 l6 0 l0 20 l-6 0 l0 -20 z M72.289 18.12 c-2.04 0 -3.48 -1.44 -3.48 -3.48 c0 -2.08 1.44 -3.44 3.48 -3.44 c2.08 0 3.44 1.36 3.44 3.44 c0 2.12 -1.32 3.48 -3.44 3.48 z M78.372 12 l6 0 l0 28 l-6 0 l0 -28 z M87.575 20 l6 0 l0 20 l-6 0 l0 -20 z M90.575 18.12 c-2.04 0 -3.48 -1.44 -3.48 -3.48 c0 -2.08 1.44 -3.44 3.48 -3.44 c2.08 0 3.44 1.36 3.44 3.44 c0 2.12 -1.32 3.48 -3.44 3.48 z M112.418 35.04 l-9 0 l-1.76 4.96 l-6.52 0 l9.8 -24.48 l6 0 l9.8 24.48 l-6.56 0 z M105.37800000000001 29.48 l5.08 0 l-2.52 -7.12 z M122.34100000000001 15.52 l6 0 l0 24.48 l-6 0 l0 -24.48 z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+        </a>
+      </div>
 
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
-    ></script>
-    <script src="pages/home.js" type="text/babel"></script>
-    <script src="pages/chat.js" type="text/babel"></script>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <a href="#quem-somos" class="navbar-item mr-6 mt-4"> O QUE SOMOS? </a>
 
-    <script type="text/babel">
-      const Link = ReactRouterDOM.Link,
-        Route = ReactRouterDOM.Route;
+          <a href="#plans" class="navbar-item mr-6 mt-4"> ASSINAR </a>
+        </div>
+      </div>
+    </nav>
 
-      const App = (props) => (
-        <ReactRouterDOM.HashRouter>
-          <nav class=" logo has-text-centered">
-            <a href="/">
-              <h1 class=" is-centered is-size-3">🤖 AuxiliAI</h1>
-            </a>
-          </nav>
+    <!-- Hero del producto -->
+    <section class="hero is-white is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-vcentered reverse-columns">
+            <div
+              class="column is-10-mobile is-10-tablet is-5-desktop is-5-widescreen is-5-fullhd"
+              data-aos="fade-down"
+            >
+              <h1 class="title titled is-1 mb-6">
+                Seu assistente administrativo virtual
+              </h1>
+              <div class="buttons">
+                <a class="mr-3" href="#plans"
+                  ><button class="button">Assine um plano</button></a
+                >
+                <a class="mr-3" href="/app.html"
+                  ><button class="button">Acessar</button></a
+                >
+              </div>
+            </div>
+            <div
+              data-aos="fade-right"
+              class="column is-10-mobile is-10-tablet is-4-desktop is-7-widescreen is-4-fullhd is-offset-1-fullhd"
+            >
+              <figure class="image is-square">
+                <img src="/img/ai.svg" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <Route path="/" exact component={Home} />
-          <Route path="/chat" exact component={Chat} />
-        </ReactRouterDOM.HashRouter>
-      );
+    <section class="hero is-white is-fullheight" id="quem-somos">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-vcentered">
+            <div
+              data-aos="fade-left"
+              class="column is-10-mobile is-offset-1-mobile is-10-tablet is-offset-1-tablet is-4-desktop is-offset-1-desktop is-4-widescreen is-offset-1-widescreen is-4-fullhd is-offset-1-fullhd"
+            >
+              <figure class="image is-square">
+                <img src="/img/in_the_office.svg" />
+              </figure>
+            </div>
+            <div
+              data-aos="fade-down"
+              class="column is-10-mobile is-offset-1-mobile is-10-tablet is-offset-1-tablet is-5-desktop is-offset-1-desktop is-5-widescreen is-offset-1-widescreen is-5-fullhd is-offset-1-fullhd"
+            >
+              <h1 class="titled title is-1 mb-6">O que somos?</h1>
+              <h2 class="subtitled subtitle">
+                No trabalho, você já teve dúvidas simples que precisou perguntar
+                várias vezes ao colega? Ou já passou por situações em que teve
+                que analisar um documento extenso em busca de uma informação e,
+                por não encontrá-la, precisou refazer todo o processo? Com
+                AuxiliAI, você tem acesso fácil e organizado às informações
+                corporativas. Analise documentos extensos e mantenha um
+                histórico do que você precisa!
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      ReactDOM.render(<App />, document.querySelector("#root"));
+    <section class="hero is-medium has-text-centered" id="plans">
+      <div class="hero-body">
+        <div class="container mt-6">
+          <div class="columns is-centered">
+            <div data-aos="zoom-in-up" class="column is-8">
+              <h1 class="titled title is-1 mb-6">
+                Pergunte sobre <b><span id="typewriter"></span></b>
+              </h1>
+
+              <div class="container is-vcentered mb-6">
+                <div
+                  class="columns is-vcentered is-multiline is-centered mt-6"
+                  data-aos="fade-up"
+                >
+                  <div class="column is-one-third">
+                    <div class="card">
+                      <div class="card-content">
+                        <h4 class="subtitle">Grátis</h4>
+                        <ul>
+                          <li>Upload de um PDF</li>
+                          <li>Limite de 10 perguntas</li>
+                          <del><li>Suporte técnico</li></del
+                          ><del><li>Suporte prioritário</li></del
+                          ><del><li>Gerenciamento de usuários</li></del>
+                        </ul>
+                      </div>
+                      <footer class="card-footer">
+                        <a href="app.html" class="card-footer-item button"
+                          >Testar</a
+                        >
+                      </footer>
+                    </div>
+                  </div>
+                  <div class="column is-one-third">
+                    <div class="card">
+                      <div class="card-content">
+                        <h4 class="subtitle">Basic R$ 49/mês</h4>
+                        <ul>
+                          <li>Upload de X megabytes</li>
+                          <li>Limite de X perguntas</li>
+                          <li>Suporte técnico</li>
+                          <del><li>Suporte prioritário</li></del
+                          ><del><li>Gerenciamento de usuários</li></del>
+                        </ul>
+                      </div>
+                      <footer class="card-footer">
+                        <a href="#" class="card-footer-item button">Assinar</a>
+                      </footer>
+                    </div>
+                  </div>
+                  <div class="column is-one-third">
+                    <div class="card">
+                      <div class="card-content">
+                        <h4 class="subtitle">Business</h4>
+                        <ul>
+                          <li>Upload de X megabytes</li>
+                          <li>Limite personalizado perguntas</li>
+                          <li>Suporte técnico</li>
+                          <li>Suporte prioritário</li>
+                          <li>Gerenciamento de usuários</li>
+                        </ul>
+                      </div>
+                      <footer class="card-footer">
+                        <a
+                          href="https://api.whatsapp.com/send?phone=5569992583935&text=Ol%C3%A1%21+Gostaria+de+ter+acesso+bussiness+ao+auxiliAI+para+meu+time%21"
+                          class="card-footer-item button"
+                          >Entre em contato</a
+                        >
+                      </footer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="subtitle subtitled">
+                Evite dúvidas no escritório. Para de analisar documentos
+                gigantescos. Com AuxiliAI, tenha acesso fácil e organizado às
+                informações corporativas rapidamente!
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-body"></div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.13.1/core.min.js"></script>
+    <script>
+      new Typewriter("#typewriter", {
+        strings: [
+          "informações corporativas!",
+          "dúvidas!",
+          "processos!",
+          "protocolos!",
+          "regras!",
+        ],
+        autoStart: true,
+        loop: true,
+      });
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+      });
     </script>
   </body>
 </html>

@@ -4,6 +4,7 @@ A GPT tool to analize pdf documents
 
 ### TODO
 
+- Add new template to chat page
 - Scrollbar in messages div
 - Add chat
 - Navegate between chats
