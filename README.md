@@ -1,5 +1,6 @@
 # Auxiliai
 
+New repo -> https://github.com/Mika-IO/auxiliai-core
 A GPT tool to analize pdf documents
 
 ### TODO
